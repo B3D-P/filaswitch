@@ -1,0 +1,112 @@
+## Values are a mash-up of Slic3r PLA values and the E3DV6 settings
+
+## Hint: [0] means array of values ([0], [1], [2]...)
+
+## Temperature handling
+## use_id: should M104 commands have tool id. M104 S210 or M104 S210 T1. Firmware dependent
+tool.temperature.use_id:  False
+
+## What command to use for controlling nozzle temperature. M104 and G10 supported
+tool.temperature.command: M104
+
+## Extruder motor current values. Adjusts motor current using M907. Values are 
+## for load/unload and for normal operation.
+## load = motor current for load/unload
+## run = motor current for normal operation
+## These can be set to 0 if not applicable
+motor.current.load: 900
+motor.current.run: 675
+
+## These prepurge steps are executed before the actual prepurge. They seem to help with tip formation on some cases
+## Disabled by default
+#prepurge.initial.retract: 20
+#prepurge.initial.retract.speed: 350
+#prepurge.initial.pause: 2500
+
+## Prepurge means the fast purge movements that purge old material before tool change
+## - temperature = change temperature of the nozzle this amount before doing the prepurge. Negative value lowers the temperature
+## length = length of one sweep
+## extrusion.length = how much material to extrude per sweep
+## speed = how fast to move in one sweep
+## count = how many sweeps
+## gap = distance to next sweep line
+prepurge.temperature.change: 0
+prepurge.sweep.length: 50 
+prepurge.sweep.extrusion.length: 4.5
+prepurge.sweep.speed: 5000 
+prepurge.sweep.count: 5
+prepurge.sweep.gap: 1
+prepurge.sweep.gap.speed: 3000
+
+## Prime extruders
+## Comment out the next line to remove
+#prerun.prime: True
+prerun.prime.length: 49
+prerun.prime.extrusion.length: 1.8
+prerun.prime.gap: 0.48
+prerun.prime.speed: 2200
+prerun.prime.xstart: 5.0
+prerun.prime.ystart: -3.0
+prerun.prime.purge.count: 10  
+
+## Rapid retract means pulling the filament out of the nozzle.
+## Various stages can be defined.
+## - initial retract happens right after prepurge is done
+## length and speed are self explanatory
+## wipe = do wipe movements during retracts to reduce oozing
+## pause = how long to let filament cool in throat (ms)
+## long retract = pulling filament fully out of way
+
+rapid.retract.initial[0].length: 20.5
+rapid.retract.initial[0].speed: 3000
+rapid.retract.wipe: False
+rapid.retract.pause: 2500
+rapid.retract.long[0].length: 35
+rapid.retract.long[0].speed: 3000
+
+## Various filament cooling movements after major retract. Uncomment to enable. Make sure that there are even amount
+## of cooling movements and the total length is 0
+## Serves as a wipe
+
+rapid.retract.cool[0].length: 3
+rapid.retract.cool[0].speed: 1600
+rapid.retract.cool[1].length: -5
+rapid.retract.cool[1].speed: 1600
+rapid.retract.cool[2].length: 5
+rapid.retract.cool[2].speed: 2000
+rapid.retract.cool[3].length: -5
+rapid.retract.cool[3].speed: 2400
+rapid.retract.cool[4].length: 5
+rapid.retract.cool[4].speed: 2400
+rapid.retract.cool[5].length: -5
+rapid.retract.cool[5].speed: 2400
+rapid.retract.cool[6].length: 5
+rapid.retract.cool[6].speed: 2400
+rapid.retract.cool[7].length: 36
+rapid.retract.cool[7].speed: 2400
+rapid.retract.cool[8].length: -150
+rapid.retract.cool[8].speed: 3000
+rapid.retract.cool[9].length: -30
+rapid.retract.cool[9].speed: 5000
+
+## Do X movement during feeding to prevent blobs
+## These are currently required for pre-prime
+feed.trail: True
+## Values from Slic3r gcode
+feed[0].length: 14
+feed[0].speed: 1050
+feed[1].length: 36
+feed[1].speed: 1600
+feed[2].length: 14
+feed[2].speed: 1050
+feed[3].length: 7
+feed[3].speed: 680
+
+## prime trail is the first extrusion after filament is almost fully fed to the nozzle.
+## Might be useful for clearing old filament if extruding bit more than normally
+
+prime.trail.extrusion.length: 5
+prime.trail.speed: 900
+
+## Tower coasting length. Use to even out the extrusion after tower if there's over-extrusion seen.
+post.tower.coast: 0
